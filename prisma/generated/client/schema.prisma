@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId        String          @id @unique
+  name          String
+  email         String?
+  tel           String
+  role          String
+  EventRegister EventRegister[]
+}
+
+model EventRegister {
+  id         Int      @id @default(autoincrement())
+  eventId    Int
+  type       String
+  level      String
+  name       String
+  gender     String
+  color      String
+  birthday   String
+  microchip  String
+  imageUrl   String
+  vaccineUrl String
+  ownerName  String
+  ownerTel   String
+  userId     String
+  metadata   String[]
+  user       User     @relation(fields: [userId], references: [userId])
+  event      Event    @relation(fields: [eventId], references: [id])
+}
+
+model Event {
+  id            Int             @id @default(autoincrement())
+  name          String
+  description   String
+  startAt       DateTime
+  endAt         DateTime
+  eventAt       DateTime
+  location      String?
+  facebook      String?
+  twitter       String?
+  website       String?
+  isActive      Boolean         @default(true)
+  imageUrl      String?
+  metadata      String[]
+  EventRegister EventRegister[]
+}
+
+model Commitee {
+  id       Int     @id @default(autoincrement())
+  userId   String? @unique
+  username String
+  name     String?
+  role     String  @default("COMMITEE")
+  Score    Score[]
+}
+
+model Buffalo {
+  id        Int     @id @default(autoincrement())
+  microchip String  @unique
+  name      String
+  typeId    Int
+  type      Type    @relation(fields: [typeId], references: [id])
+  Score     Score[]
+}
+
+model Type {
+  id          Int       @id @unique
+  name        String
+  description String?
+  isActive    Boolean   @default(false)
+  Buffalo     Buffalo[]
+}
+
+model Competition {
+  id          Int     @id @unique
+  name        String
+  description String?
+  Score       Score[]
+}
+
+model Score {
+  id            Int         @id @default(autoincrement())
+  commitee      Commitee    @relation(fields: [commiteeId], references: [id])
+  buffaloId     Int
+  buffalo       Buffalo     @relation(fields: [buffaloId], references: [id])
+  competitionId Int
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  body          Int
+  head          Int
+  neck          Int
+  horn          Int
+  back          Int
+  commiteeId    Int
+}
