@@ -1,3 +1,4 @@
+import { BuffaloWithScore } from "@/interfaces/buffalo-with-score";
 import { getBuffalosByTypeId } from "@/lib/leaderboard.action";
 import Link from "next/link";
 
@@ -30,7 +31,7 @@ export default async function TypeDetail({
           {buffalos?.length! <= 0 ?? 0 ? (
             <div>ไม่มีข้อมูล</div>
           ) : (
-            buffalos?.map((buffalo) => (
+            buffalos?.map((buffalo: BuffaloWithScore) => (
               <tr className="hover:bg-primary hover:cursor-pointer hover:text-white">
                 <td>{buffalo.name}</td>
                 <td>
