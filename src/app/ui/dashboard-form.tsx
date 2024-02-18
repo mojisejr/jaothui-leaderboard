@@ -1,3 +1,4 @@
+import { EventType } from "@/interfaces/event-type";
 import {
   createEventName,
   getEventName,
@@ -49,7 +50,7 @@ export default async function DashboardForm() {
           <label className="label label-text">เลือกรุ่นโชว์บนจอ</label>
           <div className="flex justify-between gap-2">
             <select name="typeId" className="select w-full select-bordered">
-              {types?.map((type) => (
+              {types?.map((type: EventType) => (
                 <option key={type.id} value={type.id}>
                   {type.name}
                 </option>
