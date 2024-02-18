@@ -1,6 +1,6 @@
 import { getActiveType, getEventName } from "@/lib/dashboard-form.action";
 import { Suspense } from "react";
-import Loading from "./loading";
+import Loading from "./loading-screen";
 
 export default async function DashboardData() {
   const event = await getEventName();

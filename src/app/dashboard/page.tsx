@@ -4,6 +4,7 @@ import { getUserByUserId } from "@/lib/user.action";
 import Link from "next/link";
 import { getEventName } from "@/lib/dashboard-form.action";
 import DashboardData from "../ui/dashboard-data";
+import DashboardHowTo from "../ui/dashboard-howto";
 
 export default async function DashboardPage() {
   const { userId } = auth();
@@ -13,6 +14,7 @@ export default async function DashboardPage() {
     <div className="my-6 flex w-full justify-center">
       {user?.role === "ADMIN" ? (
         <div className="grid grid-cols-1 gap-4">
+          <DashboardHowTo />
           <DashboardData />
           <DashboardForm />
         </div>
