@@ -1,6 +1,4 @@
 "use server";
-
-import { Buffalo } from "@prisma/client";
 import { getActiveType } from "./dashboard-form.action";
 import { prisma } from "./prisma";
 import { revalidatePath, unstable_noStore as noStore } from "next/cache";
