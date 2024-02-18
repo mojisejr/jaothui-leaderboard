@@ -1,8 +1,10 @@
 "use server";
 
+import { Buffalo } from "@prisma/client";
 import { getActiveType } from "./dashboard-form.action";
 import { prisma } from "./prisma";
 import { revalidatePath, unstable_noStore as noStore } from "next/cache";
+import { BuffaloWithScore } from "@/interfaces/buffalo-with-score";
 
 export async function getBuffaloScore() {
   noStore();
@@ -18,7 +20,7 @@ export async function getBuffaloScore() {
       },
     });
 
-    const scoreCalculated = buffalos.map((buffalo) => {
+    const scoreCalculated = buffalos.map((buffalo: BuffaloWithScore) => {
       const totalScore = buffalo.Score.map(
         (score) =>
           score.back + score.body + score.head + score.horn + score.neck
@@ -46,7 +48,7 @@ export async function getBuffalosByTypeId(typeId: number) {
       },
     });
 
-    const buffaloWithTotalScore = buffalos.map((buffalo) => {
+    const buffaloWithTotalScore = buffalos.map((buffalo: BuffaloWithScore) => {
       const totalScore =
         buffalo.Score.length <= 0
           ? 0

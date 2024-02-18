@@ -1,5 +1,5 @@
 export interface BuffaloWithScore {
-  totalScore: number;
+  totalScore?: number;
   type: {
     id: number;
     name: string;
