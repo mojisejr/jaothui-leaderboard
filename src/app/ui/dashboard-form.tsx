@@ -8,6 +8,8 @@ import {
   uploadBuffaloFile,
 } from "@/lib/dashboard-form.action";
 
+import { Suspense } from "react";
+
 export default async function DashboardForm() {
   const event = await getEventName();
   const types = await getTypes();
