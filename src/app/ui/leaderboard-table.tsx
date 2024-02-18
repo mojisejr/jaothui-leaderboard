@@ -3,8 +3,10 @@ import { getBuffaloScore } from "@/lib/leaderboard.action";
 import { clsx } from "clsx";
 import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
+import { Buffalo } from "@/interfaces/buffalo";
+
 export default function LeaderboardTable() {
-  const [buffalos, setBuffalo] = useState<any[]>();
+  const [buffalos, setBuffalo] = useState<Buffalo[]>();
   supabase
     .channel("db-changes")
     .on(
@@ -35,7 +37,7 @@ export default function LeaderboardTable() {
   return (
     <div className="grid grid-cols-1 w-full gap-4">
       {buffalos?.length! > 0
-        ? buffalos?.map((buffalo, index) => (
+        ? buffalos?.map((buffalo: Buffalo, index) => (
             <LeaderCard
               key={index}
               name={buffalo.name}
